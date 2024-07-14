@@ -1,0 +1,39 @@
+const mongoose=require("mongoose");
+const problemSchema=new mongoose.Schema({
+    title:{
+        type:String,
+        required:true
+    },
+    description:{
+        type:String,
+        required:true
+    },
+    slug:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    solved:{
+        type:Number,
+        default:0,
+    },
+    difficulty:{
+        type:String,
+        enum:["Easy","Medium","Hard"],
+        default:"Medium"
+    },
+    submissions:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Submission"
+        },
+    ],
+    defaultCode:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            required:true,
+            ref:"DefaultCode"
+        }
+    ]
+})
+module.exports=mongoose.model("Problem",problemSchema)

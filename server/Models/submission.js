@@ -1,0 +1,29 @@
+const mongoose=require("mongoose");
+const submissionSchema=new mongoose.Schema({
+    problemId:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:"Problem"
+    },
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:"User"
+    },
+    code:{
+        type:String,
+        required:true
+    },
+    status:{
+        type:String,
+        enum:["AC","REJECTED","PENDING"],
+        default:"PENDING"
+    },
+    testCases:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"TestCases"
+        }
+    ]
+})
+module.exports=mongoose.model("Submission",submissionSchema)

@@ -1,0 +1,19 @@
+{
+  "name": "boilerplate-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "boiler:generate": "npm run build && node dist/index.js",
+    "build": "esbuild src/index.js --bundle --platform=node --outdir=dist",
+    "esbuild": "esbuild"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "esbuild": "^0.23.0"
+  }
+}

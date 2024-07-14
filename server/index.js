@@ -1,0 +1,30 @@
+const express=require("express");
+const app=express();
+const database=require("./Config/database");
+const userRoutes=require("./Routes/user")
+const submissionRoutes=require("./Routes/submission");
+const cors=require("cors");
+const cookieParser=require("cookie-parser");
+require('dotenv').config();
+const PORT=process.env.PORT;
+database.ConnectDB();
+
+app.use(cookieParser());
+app.use(express.json());
+app.use(cors(
+    {
+        origin:"*",
+        credentials:true
+    }
+));
+app.use("/api/v1/auth",userRoutes);
+app.use("/api/v1/submission",submissionRoutes);
+app.get("/",(req,res)=>{
+    return res.json({
+            success:true,
+            message:"Your server is up and running",
+    })
+})
+app.listen(PORT,"0.0.0.0",()=>{
+    console.log(`app is running ${PORT}`);
+})
