@@ -24,6 +24,10 @@ const submissionSchema=new mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:"TestCases"
         }
-    ]
+    ],
+    createdAt:{
+        type:Date,
+        default:Date.now
+    }
 })
 module.exports=mongoose.model("Submission",submissionSchema)

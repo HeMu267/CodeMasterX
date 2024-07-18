@@ -34,7 +34,7 @@ exports.submitProblem=async(req,res)=>{
         });
     }
     const dbProblem=await Problem.findById(SubmissionInput.data.problemId);
-
+ 
     if(!dbProblem)
     {
         return res.status(400).json({
@@ -85,6 +85,7 @@ exports.submitProblem=async(req,res)=>{
 }
 exports.callback=async(req,res)=>{
     const parsedBody=SubmissionCallback.safeParse(req.body);
+    // console.log("call back called"); 
     if(!parsedBody.success)
     {
         return res.status(403).json({
@@ -241,9 +242,37 @@ exports.getAllSubmissions=async(req,res)=>{
           }) 
           .sort({ createdAt: -1 })
           .limit(10).exec();
-    
+          const timeT=[];
+            for(let i=0;i<submissions.length;i++)
+            {
+              let sumTime=0;
+              sumTime+=(submissions[i].testCases.reduce((sum,obj)=>(parseFloat(sum+obj.time)),0));
+              timeT[i]=sumTime;
+        }
+        const memoryM=[];
+            for(let i=0;i<submissions.length;i++)
+            {
+              let mem=0;
+              mem+=(submissions[i].testCases.reduce((sum,obj)=>(parseFloat(sum+obj.memory)),0));
+              memoryM[i]=mem;
+        }
+        const testPass=[];
+            for(let i=0;i<submissions.length;i++)
+            {
+              let test=0;
+              submissions[i].testCases.forEach(testCase => {
+                if (testCase.status === "AC") {
+                  test++;
+                }
+              });
+              let total=submissions[i].testCases.length;
+              testPass[i]={test,total};
+            }
         return res.status(200).json({
           submissions,
+          timeT,
+          memoryM,
+          testPass
         });
       } catch (error) {
         return res.status(500).json({

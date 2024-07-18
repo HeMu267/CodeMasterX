@@ -2,8 +2,9 @@ const Problem=require("../Models/problem");
 const DefaultCode=require("../Models/default-code");
 const fs=require('fs');
 const {LANG_MAPPING}=require("../common/languageMapping");
-const {ConnectDB}=require("../Config/database");
-const { default: mongoose } = require("mongoose");
+const database=require("../Config/database");
+const { mongoose } = require("mongoose");
+require("dotenv").config();
 const readFileSys=async(path)=>{
     try{
         const data=await fs.promises.readFile(path,"utf8");
@@ -16,7 +17,7 @@ const readFileSys=async(path)=>{
 
 async function main(problemSlug)
 {
-    ConnectDB();
+    await database.ConnectDB();
     const problemStatement=await readFileSys(`${process.env.MOUNT_PATH}/${problemSlug}/Problem.md`);
     const problem=await Problem.findOneAndUpdate(
             {slug:problemSlug},
@@ -32,7 +33,7 @@ async function main(problemSlug)
     )
     await Promise.all(Object.keys(LANG_MAPPING).map(async(lang)=>{
         const code=await readFileSys(`${process.env.MOUNT_PATH}/${problemSlug}/boilerplate/function.${lang}`);
-        await DefaultCode.findOneAndUpdate(
+        const defaults=await DefaultCode.findOneAndUpdate(
             {
                 languageId:LANG_MAPPING[lang].internal,
                 problemId:problem._id
@@ -46,7 +47,17 @@ async function main(problemSlug)
                 upsert:true,
             }
         )
+        await Problem.findByIdAndUpdate(
+            {
+                _id:problem._id
+            },{
+                $push:{
+                    defaultCode:defaults._id
+                }
+            }
+        )
     }))
+
     await mongoose.disconnect();
 }
 main(process.argv[2]);

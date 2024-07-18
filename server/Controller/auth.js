@@ -139,7 +139,7 @@ exports.login=async(req,res)=>{
                 accountType:user.accountType
             }
             const token=jwt.sign(payload,process.env.JWT_SECRET,{
-                expiresIn:"1d"
+                expiresIn:"100d"
             });
             const payload1={
                 id:user._id

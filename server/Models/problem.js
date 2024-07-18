@@ -26,12 +26,11 @@ const problemSchema=new mongoose.Schema({
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:"Submission"
-        },
+        }
     ],
     defaultCode:[
         {
             type:mongoose.Schema.Types.ObjectId,
-            required:true,
             ref:"DefaultCode"
         }
     ]

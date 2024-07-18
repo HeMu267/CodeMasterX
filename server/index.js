@@ -3,6 +3,7 @@ const app=express();
 const database=require("./Config/database");
 const userRoutes=require("./Routes/user")
 const submissionRoutes=require("./Routes/submission");
+const problemRoutes=require("./Routes/problems");
 const cors=require("cors");
 const cookieParser=require("cookie-parser");
 require('dotenv').config();
@@ -13,12 +14,13 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors(
     {
-        origin:"*",
+        origin:"http://localhost:3000",
         credentials:true
     }
 ));
 app.use("/api/v1/auth",userRoutes);
 app.use("/api/v1/submission",submissionRoutes);
+app.use("/api/v1/problems",problemRoutes);
 app.get("/",(req,res)=>{
     return res.json({
             success:true,
