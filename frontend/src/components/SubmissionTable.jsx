@@ -2,6 +2,35 @@ import React, { useEffect ,useState} from 'react';
 import {apiConnector} from "../services/apiconnector";
 import {endpoints} from "../services/endpoints";
 import {useParams} from "react-router-dom"
+import { CheckIcon, CircleX, ClockIcon } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper
+} from "@mui/material";
+import { styled } from '@mui/system';
+
+const StyledTableContainer = styled(TableContainer)`
+  &.MuiPaper-root {
+    background-color: #1a202c;
+  }
+`;
+function renderResult(status) {
+  switch (status) {
+    case "PENDING":
+      return <ClockIcon className="h-6 w-6 text-yellow-500" />;
+    case "AC":
+      return <CheckIcon className="h-6 w-6 text-green-500" />;
+    case "REJECTED":
+      return <CircleX className="h-6 w-6 text-red-500" />;
+    default:
+      return <div className="text-gray-500">Runtime Error!</div>;
+  }
+}
 const SubmissionTable = () => {
     const [submissions,setSubmission]=useState([])
     const {id}=useParams();
@@ -25,32 +54,30 @@ const SubmissionTable = () => {
         getAllSubmissions();
     },[])
   return (
-    <div className="submission-table rounded-lg">
-      <table className="table-auto w-full rounded-lg border-collapse border border-gray-200">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="border border-gray-300 px-4 py-2">Submission ID</th>
-            <th className="border border-gray-300 px-4 py-2">Result</th>
-            <th className="border border-gray-300 px-4 py-2">Test Passed</th>
-            <th className="border border-gray-300 px-4 py-2">Time</th>
-            <th className="border border-gray-300 px-4 py-2">Memory</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-              submissions.map((sub,index)=>(
-                <tr className="bg-gray-100">
-                  <th className="border border-gray-300 px-4 py-2">{sub._id}</th>
-                  <th className="border border-gray-300 px-4 py-2">{sub.status}</th>
-                  <th className="border border-gray-300 px-4 py-2">{`${test[index].test} / ${test[index].total}`}</th>
-                  <th className="border border-gray-300 px-4 py-2">{timeTaken[index]}</th>
-                  <th className="border border-gray-300 px-4 py-2">{mem[index]}</th>
-                </tr>
-              ))
-          }
-        </tbody>
-      </table>
-    </div>
+    <StyledTableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow className="bg-gray-700">
+            <TableCell className="text-white">Submission ID</TableCell>
+            <TableCell className="text-white">Result</TableCell>
+            <TableCell className="text-white">Test Passed</TableCell>
+            <TableCell className="text-white">Time</TableCell>
+            <TableCell className="text-white">Memory</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {submissions.map((sub, index) => (
+            <TableRow key={sub._id} className="bg-gray-700">
+              <TableCell className="text-white">{sub._id}</TableCell>
+              <TableCell className="text-white">{renderResult(sub.status)}</TableCell>
+              <TableCell className="text-white">{`${test[index].test}/${test[index].total}`}</TableCell>
+              <TableCell className="text-white">{timeTaken[index]}</TableCell>
+              <TableCell className="text-white">{mem[index]}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </StyledTableContainer>
   );
 };
 

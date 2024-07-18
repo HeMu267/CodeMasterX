@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <climits>
+#include <bits/stdc++.h>
 
 ##USER_CODE_HERE##
 

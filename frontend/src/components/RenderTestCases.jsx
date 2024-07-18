@@ -13,13 +13,13 @@ const RenderTestCases = ({testcases}) => {
             return <div className="text-gray-500">Runtime Error!</div>;
         }
       }
-      console.log(testcases);
+      // console.log(testcases);
   return (
-    <div className="grid grid-cols-6 gap-4">
+    <div className="grid grid-cols-3 gap-4">
       {testcases.map((testcase, index) => (
         <div key={index} className="border rounded-md">
           <div className="px-2 pt-2 flex justify-center">
-            <div className="">Test #{index + 1}</div>
+            <div className="text-white">Test #{index + 1}</div>
           </div>
           <div className="p-2 flex justify-center">
             {renderResult(testcase.status)}

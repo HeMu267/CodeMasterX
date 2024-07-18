@@ -7,7 +7,7 @@ export function Problems() {
     const getProblems=async()=>{
         try{
             const result=await apiConnector("GET",endpoints.GET_PROBLEMS);
-            console.log(result);
+            // console.log(result);
             setProblems(result.data.problems);
         }catch(err)
         {

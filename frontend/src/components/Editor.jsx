@@ -92,7 +92,7 @@ export const Editors = ({problem}) =>{
             pollWithBackoff(response.data.id, 10);
         }catch(err)
         {  
-            toast.error(err.response.status);
+            toast.error("Cannot Process");
             setStatus(submitStatus.SUBMIT);
         }
     }
@@ -115,7 +115,7 @@ export const Editors = ({problem}) =>{
             }
         />
         <div className='flex justify-between w-full'>
-            <button onClick={token?submit:()=>{navigate("/login")}} disabled={status==submitStatus.PENDING} className=' bg-gray-700 rounded text-white p-2 hover:bg-gray-500'>
+            <button onClick={token?submit:()=>{navigate("/login")}} disabled={status==submitStatus.PENDING} className=' bg-gray-700 rounded h-[60px] text-white p-4 hover:bg-gray-500'>
             {
                 token?"Submit":"Login"
             }

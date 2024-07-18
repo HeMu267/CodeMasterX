@@ -8,7 +8,7 @@ import {LoginPage} from './pages/login';
 import Problem  from "./components/Problem";
 function App() {
   return (
-    <div className={`w-screen min-h-screen relative flex flex-col font-inter`}>
+    <div className={`w-screen min-h-screen bg-gray-900 relative flex flex-col font-inter`}>
       <Appbar/>
       <Routes>
         <Route path='/' element={<Home/>}/>
