@@ -16,12 +16,12 @@ int main() {
   
     file.close();
     int size_arr;
-  std::istringstream(lines[0]) >> size_arr;
-  std::vector<int> arr(size_arr);
-  if(!size_arr==0) {
-  	std::istringstream iss(lines[1]);
-  	for (int i=0; i < size_arr; i++) iss >> arr[i];
-  }
+    std::istringstream(lines[0]) >> size_arr;
+    std::vector<int> arr(size_arr);
+    if(!size_arr==0) {
+      std::istringstream iss(lines[1]);
+      for (int i=0; i < size_arr; i++) iss >> arr[i];
+    }
     int result = maxSubArray(arr);
     std::cout << result << std::endl;
     return 0;

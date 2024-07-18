@@ -10,7 +10,7 @@ const RenderTestCases = ({testcases}) => {
           case "FAILED":
             return <CircleX className="h-6 w-6 text-red-500" />;
           default:
-            return <div className="text-gray-500">Runtime Error!</div>;
+            return <div className="text-gray-500">Error!</div>;
         }
       }
       // console.log(testcases);
