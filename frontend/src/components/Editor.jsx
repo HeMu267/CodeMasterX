@@ -51,7 +51,7 @@ export const Editors = ({problem}) =>{
           }
       
           const response = await apiConnector("GET",`${endpoints.GET_SUBMISSION}?id=${id}`,{token});
-          console.log(response);
+        //   console.log(response);
           if (response.data.submission.status === "PENDING") {
             setTestCases(response.data.testCases);
             await new Promise((resolve) => setTimeout(resolve, 2.5 * 1000));
