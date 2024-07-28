@@ -14,7 +14,7 @@ export const Appbar = () => {
     <header className="bg-gray-900 border-b-2 border-gray-700 text-white px-4 md:px-6 py-3 flex items-center justify-between">
       <Link to="/" className="flex items-center gap-2" prefetch={false}>
         <CodeIcon className='h-6 w-6'></CodeIcon>
-        <span className="text-lg font-bold">CodeMaster</span>
+        <span className="text-lg font-bold">CodeMasterX</span>
       </Link>
       <nav className="hidden md:flex items-center gap-6">
         <Link to="/Problems" className="hover:underline" prefetch={false}>
