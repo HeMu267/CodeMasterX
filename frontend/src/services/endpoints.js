@@ -1,4 +1,4 @@
-const BASE_URL="http://localhost:4000/api/v1"
+const BASE_URL=process.env.BASE_URL
 export const endpoints={
     GET_PROBLEMS:BASE_URL+"/problems/getAllProblems",
     LOGIN_API:BASE_URL+"/auth/login",
