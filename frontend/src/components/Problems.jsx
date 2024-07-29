@@ -6,6 +6,7 @@ export function Problems() {
     const [problems,setProblems]=useState([]);
     const getProblems=async()=>{
         try{
+            console.log(endpoints.GET_PROBLEMS);
             const result=await apiConnector("GET",endpoints.GET_PROBLEMS);
             // console.log(result);
             setProblems(result.data.problems);
