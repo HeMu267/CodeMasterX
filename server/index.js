@@ -14,7 +14,8 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors(
     {
-        origin:"*",
+        origin:"http://localhost:3000",
+        credentials:true,
     }
 ));
 app.use("/api/v1/auth",userRoutes);
