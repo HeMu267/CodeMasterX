@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors(
     {
-        origin: ["https://code-master-x.vercel.app", "http://13.203.110.89:2358"], // ✅ Add EC2 IP
+        origin: ["https://code-master-x.vercel.app", "http://13.203.110.89:2358","https://code-master-mh9iexlqz-himanshus-projects-e18e233b.vercel.app"], // ✅ Add EC2 IP
         credentials: true,
     }
 ));
