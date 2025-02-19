@@ -50,7 +50,10 @@ export const Editors = ({problem}) =>{
             return;
           }
       
-          const response = await apiConnector("GET",`${endpoints.GET_SUBMISSION}?id=${id}`,{token});
+          const response = await apiConnector("GET",`${endpoints.GET_SUBMISSION}?id=${id}`,{token},
+          {
+            Authorization: `Bearer ${token}`,
+          });
         //   console.log(response);
           if (response.data.submission.status === "PENDING") {
             setTestCases(response.data.testCases);
