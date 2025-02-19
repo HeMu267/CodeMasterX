@@ -12,6 +12,7 @@ database.ConnectDB();
 
 app.use(cookieParser());
 app.use(express.json());
+app.set('trust proxy', 1); // Trust first proxy
 app.use(cors(
     {
         origin: ["https://code-master-x.vercel.app", "http://13.203.110.89:2358","https://code-master-mh9iexlqz-himanshus-projects-e18e233b.vercel.app"], // ✅ Add EC2 IP
