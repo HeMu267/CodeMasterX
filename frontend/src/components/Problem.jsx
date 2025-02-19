@@ -13,7 +13,9 @@ const Problem = () => {
     const [problem, setProblem] = useState(null);
     const {token}=useSelector((state)=>state.auth);
     const getProblem=async()=>{
-        const response=await apiConnector("GET",`${endpoints.GET_PROBLEM}?id=${id}`,{token});
+        const response=await apiConnector("GET",`${endpoints.GET_PROBLEM}?id=${id}`,{token},{
+            Authorization: `Bearer ${token}`,
+          });
         // console.log(response);
         setProblem(response.data.problem);
     }
