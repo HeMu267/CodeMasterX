@@ -14,8 +14,8 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors(
     {
-        origin:"http://localhost:3000",
-        credentials:true,
+        origin: ["https://code-master-x.vercel.app", "http://13.203.110.89:2358"], // ✅ Add EC2 IP
+        credentials: true,
     }
 ));
 app.use("/api/v1/auth",userRoutes);
