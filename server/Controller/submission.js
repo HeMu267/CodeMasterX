@@ -84,6 +84,7 @@ exports.submitProblem=async(req,res)=>{
     )
 }
 exports.callback=async(req,res)=>{
+    console.log(req.body);
     const parsedBody=SubmissionCallback.safeParse(req.body);
     // console.log("call back called"); 
     if(!parsedBody.success)
@@ -92,6 +93,7 @@ exports.callback=async(req,res)=>{
             message:"invalid input"
         })
     }
+    console.log("not reached"); 
     const session=await mongoose.startSession();
     session.startTransaction();
     try{
